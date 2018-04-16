@@ -1,0 +1,2 @@
+# exclude executable in bin directory
+bin /*
