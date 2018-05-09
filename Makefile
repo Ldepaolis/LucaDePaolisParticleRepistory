@@ -18,10 +18,8 @@ _dummy := $(shell mkdir -p bin/ obj/)
 
 all: LucaDePaolisParticleProgram
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cxx ; $(CC) $(CFLAGS) -c -o $@ $< `root-config --libs`
+LucaDePaolisParticleProgram: $(OBJ_FILES) ; $(CC) $(CFLAGS) -o bin/$@ $^ $(UTILDIR)/$@.cxx `root-config --libs`
 
-LucaDePaolisParticleProgram: $(OBJ_FILES) ; $(CC) $(CFLAGS) -o bin/$@ $^ $(UTILDIR)/$@.cxx 
-
-
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cxx ; $(CC) $(CFLAGS) -c -o $@ $< 
 
 clean: ; rm bin/* rm obj/*

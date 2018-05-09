@@ -1,5 +1,9 @@
 	16/04/2018 Luca.depaolis@lnf.infn.it
 	*Setting up repistory skeleton
 	*Created first example of executable: file .cxx in folder "util", program in folder "bin"
+	18/04/2018 
+	*Builded the Makefile of the program. Inside also the libraries of ROOT version 6.1.
 
+	19/04/2018
+	*Test ROOT code
 	

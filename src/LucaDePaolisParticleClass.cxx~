@@ -1,6 +1,0 @@
-#include "LucaDePaolisParticleLibrary.h"
-
-void LucaDePaolisParticleLibrary::printHello()
-{
-  std::cout<<"Hello from LucaDePaolisParticleClass"<<std::endl;
-}
