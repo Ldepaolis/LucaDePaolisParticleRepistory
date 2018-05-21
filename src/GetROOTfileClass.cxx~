@@ -1,0 +1,344 @@
+
+#ifndef _GETROOTFILECLASS_CXX
+#define _GETROOTFILECLASS_CXX
+
+#include "GetROOTfile.h"
+#include "LucaDePaolisParticleLibrary.h"
+#include "LorentzMomentum.h"
+#include <iostream>
+#include <string>
+#include <fstream>
+
+
+
+
+DataFile::DataFile()
+{
+  namefile = "nofilename";
+  path = "nofilepath";
+}
+
+
+DataFile::DataFile(TString filename, TString filepath)
+{
+  namefile = filename;
+  path = filepath;
+}
+
+
+bool DataFile::IsTxt() const
+{
+  string str = (string)this->GetName();
+  int lenght = (int)strlen(str.c_str());
+  string endfile = str.substr(lenght-4,4);
+  bool answer;
+
+  if( endfile==".txt")
+    {
+      answer=true;
+    }
+  else
+    {
+      answer =false;
+      cout<<"file "<<this->GetName()<<" is not .txt file"<<endl;
+    }
+  return answer;
+}
+
+
+
+void DataFile::ConvertTXTtoROOTfile() const
+{
+
+  //Declaration of Variables
+  Electron electron;
+  AntiElectron positron;
+  Muon muon;
+  AntiMuon antimuon;
+  Pion pion;
+  AntiPion antipion;
+  LorentzMomentum LM;
+
+  int ID;
+  double px, py, pz, q, m;
+    
+
+  TString namefile = this->GetPath();
+  namefile.ReplaceAll(".txt", ".root");
+  
+  //Building the Output ROOT file
+  TFile *fout = TFile::Open(namefile, "recreate");
+  fout->cd();
+
+  cout<<"ciao"<<endl;
+
+  //Electrons TTree
+  TTree *Electrons = new TTree("Electrons", "Data about electrons");
+ 
+    
+  //Defining Branches
+  TBranch *ElectronID =Electrons->Branch("ElectronID", &ID, "ParticleID/D");
+  TBranch *ElectronPx = Electrons->Branch("ElectronPx", &px, "px/D");
+  TBranch *ElectronPy = Electrons->Branch("ElectronPy", &py, "py/D");
+  TBranch *ElectronPz = Electrons->Branch("ElectronPz", &pz, "pz/D");
+  TBranch *ElectronMass = Electrons->Branch("ElectronMass", &m, "mass/D");
+  TBranch *ElectronCharge = Electrons->Branch("ElectronCharge", &q, "charge/D");
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+  
+  //Positrons TTree
+  TTree *Positrons = new TTree("Positrons", "Data about positrons");
+
+
+  //Defining Branches
+  TBranch *PositronID = Positrons->Branch("PositronID", &ID, "ParticleID/I");
+  TBranch *PositronPx = Positrons->Branch("PositronPx", &px, "px/D");
+  TBranch *PositronPy = Positrons->Branch("PositronPy", &py, "py/D");
+  TBranch *PositronPz = Positrons->Branch("PositronPz", &pz, "pz/D");
+  TBranch *PositronMass = Positrons->Branch("PositronMass", &m, "mass/D");
+  TBranch *PositronCharge = Positrons->Branch("PositronCharge", &q, "charge/D");
+
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+  
+  //Muons TTree
+  TTree *Muons = new TTree("Muons", "Data about muons");
+
+
+  //Defining Branches
+  TBranch *MuonID = Muons->Branch("MuonID", &ID, "ParticleID/I");
+  TBranch *MuonPx = Muons->Branch("MuonPx", &px, "px/D");
+  TBranch *MuonPy = Muons->Branch("MuonPy", &py, "py/D");
+  TBranch *MuonPz = Muons->Branch("MuonPz", &pz, "pz/D");
+  TBranch *MuonMass = Muons->Branch("MuonMass", &m, "mass/D");
+  TBranch *MuonCharge = Muons->Branch("MuonCharge", &q, "charge/D");
+
+  
+
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+  
+  //Anti-Muons TTree
+  TTree *AntiMuons = new TTree("AntiMuons", "Data about antimuons");
+  
+
+  //Defining Branches
+  TBranch *AntiMuonID = AntiMuons->Branch("AntiMuonID", &ID, "ParticleID/I");
+  TBranch *AntiMuonPx = AntiMuons->Branch("AntiMuonPx", &px, "px/D");
+  TBranch *AntiMuonPy = AntiMuons->Branch("AntiMuonPy", &py, "py/D");
+  TBranch *AntiMuonPz = AntiMuons->Branch("AntiMuonPz", &pz, "pz/D");
+  TBranch *AntiMuonMass = AntiMuons->Branch("AntiMuonMass", &m, "mass/D");
+  TBranch *AntiMuonCharge = AntiMuons->Branch("AntiMuonCharge", &q, "charge/D");
+  
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  
+  //Positive Pions TTree
+   TTree *PositivePions = new TTree("PositivePions", "Data about positive pions");
+
+
+   //Defining Branches
+  TBranch *PositivePionID = PositivePions->Branch("PositivePionID", &ID, "ParticleID/I");
+  TBranch *PositivePionPx = PositivePions->Branch("PositivePionPx", &px, "px/D");
+  TBranch *PositivePionPy = PositivePions->Branch("PositivePionPy", &py, "py/D");
+  TBranch *PositivePionPz = PositivePions->Branch("PositivePionPz", &pz, "pz/D");
+  TBranch *PositivePionMass = PositivePions->Branch("PositivePionMass", &m, "mass/D");
+  TBranch *PositivePionCharge = PositivePions->Branch("PositivePionCharge", &q, "charge/D");
+
+
+
+  
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+  
+  //Negative Pions
+  TTree *NegativePions = new TTree("NegativePions", "Data about negative pions");
+
+
+      //Defining Branches
+  TBranch *NegativePionID = NegativePions->Branch("NegativePionID", &ID, "ParticleID/I");
+  TBranch *NegativePionPx = NegativePions->Branch("NegativePionPx", &px, "px/D");
+  TBranch *NegativePionPy = NegativePions->Branch("NegativePionPy", &py, "py/D");
+  TBranch *NegativePionPz = NegativePions->Branch("NegativePionPz", &pz, "pz/D");
+  TBranch *NegativePionMass = NegativePions->Branch("NegativePionMass", &m, "mass/D");
+  TBranch *NegativePionCharge = NegativePions->Branch("NegativePionCharge", &q, "charge/D");
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  //Reading TXT file with Data
+  
+  //Declaration of file .txt
+  ifstream IN_FILE;
+  IN_FILE.open((string)path, ios::in);
+  cout<<path<<endl;
+  string ParticleName, line;
+ 
+  if (IN_FILE.is_open())
+    {
+      //First two lines are introduction lines
+      getline(IN_FILE,line);
+      getline(IN_FILE,line);
+            
+      while (!IN_FILE.eof())
+	{
+	  IN_FILE >> ParticleName >> q >> px >> py >>pz;;
+	  //Storing Muon particles
+	  if (ParticleName == "muon")
+	    {
+	      //Storing Muons
+	      if (q > 0)
+		{
+		  
+		  //Filling Muon elements
+		  muon.SetPx(px);
+		  muon.SetPy(py);
+		  muon.SetPz(pz);
+
+		  ID = muon.GetKindofParticle();
+		  m = muon.GetMass();
+		  q = muon.GetCharge();
+
+		  //Filling Branch
+		  Muons->Fill();
+		}
+
+	      //Storing AntiMuons
+	      else
+		{
+
+		  
+		  //Filling Anti-Muon elements
+		  antimuon.SetPx(px);
+		  antimuon.SetPy(py);
+		  antimuon.SetPz(pz);
+
+		  ID = antimuon.GetKindofParticle();
+		  m = antimuon.GetMass();
+		  q = antimuon.GetCharge();
+
+		  //Filling Branch
+		  AntiMuons->Fill();
+		  
+		}
+	    }
+	  
+	  
+	  if (ParticleName == "electron")
+	    {
+	      if (q > 0)
+		{
+
+		  
+		  //Filling Electron elements
+		  electron.SetPx(px);
+		  electron.SetPy(py);
+		  electron.SetPz(pz);
+
+		  ID = electron.GetKindofParticle();
+		  cout<<ID<<endl;
+		  m = electron.GetMass();
+		  q = electron.GetCharge();
+
+		  
+		  //Filling Branch
+		  Electrons->Fill();
+		  
+		}
+	      else
+		{
+
+		  
+		  //Filling Anti-Electron elements
+		  positron.SetPx(px);
+		  positron.SetPy(py);
+		  positron.SetPz(pz);
+
+		  ID = positron.GetKindofParticle();
+		  m = positron.GetMass();
+		  q = positron.GetCharge();
+
+		  //Filling Branch
+		  Positrons->Fill();
+		 
+		}
+	    }
+
+
+	  if (ParticleName == "pion")
+	    {
+	      if (q > 0)
+		{
+
+		  
+		  //Filling Pion elements
+		  pion.SetPx(px);
+		  pion.SetPy(py);
+		  pion.SetPz(pz);
+
+		  ID = pion.GetKindofParticle();
+		  m = pion.GetMass();
+		  q = pion.GetCharge();
+		 
+
+		  //Filling Branch
+		  PositivePions->Fill();
+		  
+		}
+	      else
+		{
+
+		 
+		  //Filling Anti-Pion elements
+		  antipion.SetPx(px);
+		  antipion.SetPy(py);
+		  antipion.SetPz(pz);
+
+
+		  ID = antipion.GetKindofParticle();
+		  m = antipion.GetMass();
+		  q = antipion.GetCharge();
+
+		  
+		  //Filling Branch
+		  NegativePions->Fill();
+		  
+		}
+	    }
+	  
+	}
+      
+    }
+
+  fout->Print();
+  fout->Write();
+  fout->Close();
+    
+  
+}
+
+
+
+
+#endif

@@ -9,3 +9,24 @@ LucaDePaolisParticleProgram could be called using ./bin/LucaDePaolisParticleProg
 To modify the program and recompile it is sufficient to enter in folder "LucaDePaolisParticleRepistory" and type "make" on terminal.
 For more details open Makefile and read it.
 
+---->src:
+--LorentzMomentumClass.cxx
+--LucaDePaolisParticleClass.cxx
+
+
+---->util:
+--LucaDePaolisParticleProgram.cxx
+
+
+---->LucaDePaolisParticleLibraries
+--LorentzMomentum.h
+--LucaDePaolisParticleLibrary.h
+
+
+---->obj:
+--LorentzMomentum.o
+--LucaDePaolisParticleClass.o
+
+
+
+-----> A sample of data file is inside the folder of the program. It is the "DATA.txt" file. Is it possible to execute the program using similar data.
